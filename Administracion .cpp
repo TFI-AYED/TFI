@@ -1,8 +1,15 @@
+/*Entre linea 590 y 600 fijarse que no anda, dejarlo asi o corregir*/
+
+
+
+
 #include<stdio.h>
 #include<conio.h>
 #include<stdlib.h>
 #include<string.h>
 struct veterinario{
+	char usuario[10];
+    char contrasenia[10];
 	char apeynombre[60];
 	char matricula[20];
 	char dni[20];
@@ -59,11 +66,14 @@ void cargar2(FILE *user){
 							vector[i]= u;
 							i++;
 							fread(&u,sizeof(usuario),1,user);
-							//printf("hola");
 						}
 						n=i;
-						
-						//printf("hola");
+						/*
+						for(i=0;i<n;i++)
+						{
+							puts(vector[i].usuario);
+						}
+						system("pause");*/
 							
 							band=0;
 							for(i=0;i<n;i++)
@@ -77,8 +87,6 @@ void cargar2(FILE *user){
 									b1=false;
 									i=n;
 								}
-								
-							
 							}
 							
 							if(band==0)
@@ -86,24 +94,8 @@ void cargar2(FILE *user){
 								b1=true;
 							}
 					}
-					/*
-					if(band==0)
-					b1=true;*/
 				}
     				
-    				
-					
-				
-    			
-    			
-					
-					
-					
-					/*if(bandera==1)
-					{
-						b1=true;
-						fread(&u,sizeof(usuario),1,user);
-					}*/
 							
 							
 					if(aux[0]>=97 and aux[0]<=122){
@@ -303,7 +295,6 @@ void cargar2(FILE *user){
 main()
 {
 	veterinario vet;
-	usuario u;
 	int opc,i,band,cant,bandera;
 	FILE *p;
 	FILE *user;
@@ -327,8 +318,8 @@ main()
 				int cm=0, cn=0,valor,i,n;
 				bool b1, b2 , b3, b4, b5,aceptar,band=0,primero=0,bande,bandera,bucle;
 				char aux[20],aux2[20];
-				usuario vector[100];
-				veterinario vector2[100];
+				veterinario vector[100];
+
 				
 				user=fopen("Veterinarios.dat","rb");
 				if(user==NULL)
@@ -359,18 +350,21 @@ main()
     				while(b1==false)
 	    			{
 	    				rewind(user);
-	    				fread(&u,sizeof(usuario),1,user);
+	    				fread(&vet,sizeof(veterinario),1,user);
 		    			i=0;
 		    			
 						while(!feof(user)){
-							vector[i]= u;
+							vector[i] = vet;
 							i++;
-							fread(&u,sizeof(usuario),1,user);
-							//printf("hola");
+							fread(&vet,sizeof(veterinario),1,user);
 						}
 						n=i;
-						
-						//printf("hola");
+						/*
+						for(i=0;i<n;i++)
+						{
+							puts(vector[i].apeynombre);
+						}
+						system("pause");*/
 							
 							band=0;
 							for(i=0;i<n;i++)
@@ -395,23 +389,18 @@ main()
 					}
 				}
 					
-		/*if(bandera==1)
-					{
-						b1=true;
-						fread(&u,sizeof(usuario),1,user);
-					}*/
 							
 							
 					if(aux[0]>=97 and aux[0]<=122){
 						b2=true;
-						fread(&u,sizeof(usuario),1,user);
+						fread(&vet,sizeof(veterinario),1,user);
 					}
 					else{
 						b2=false;
 						printf("El nombre no comienza con minuscula, por favor digite otro: ");
 						_flushall();
 						gets(aux);
-						fread(&u,sizeof(usuario),1,user);
+						fread(&vet,sizeof(veterinario),1,user);
 					}
 																													
 					for(i=1;i<20;i++){
@@ -423,12 +412,12 @@ main()
 						printf("\nNo posee 2 mayusculas o mas, por favor digite otro:  ");
 						_flushall();
 						gets(aux);
-						fread(&u,sizeof(usuario),1,user);
+						fread(&vet,sizeof(veterinario),1,user);
 						b3=false;
 					}
 					else{
 						b3=true;
-						fread(&u,sizeof(usuario),1,user);
+						fread(&vet,sizeof(veterinario),1,user);
 					}
 					for(i=0;i<20;i++){
 						if(aux[i]=='1'){
@@ -486,22 +475,22 @@ main()
 						_flushall();
 						gets(aux);
 						b4=false;
-						fread(&u,sizeof(usuario),1,user);
+						fread(&vet,sizeof(veterinario),1,user);
 					}
 					else{
 						b4=true;
-						fread(&u,sizeof(usuario),1,user);
+						fread(&vet,sizeof(veterinario),1,user);
 					}
 					if(strlen(aux)>10 || strlen(aux)<6){
 						printf("\nEl tama%co del nombre no es valido, por favor digite otro: ",164);
 						_flushall();
 						gets(aux);
 						b5=false;
-						fread(&u,sizeof(usuario),1,user);
+						fread(&vet,sizeof(veterinario),1,user);
 					}
 					else{
 						b5=true;
-						fread(&u,sizeof(usuario),1,user);
+						fread(&vet,sizeof(veterinario),1,user);
 					}				
 				} 
 				
@@ -509,65 +498,65 @@ main()
 				
 					printf("\nIngrese la contrase%ca para el usuario, debe cumplir con las siguientes caracteristicas: \na) Poseer al menos, una letra mayuscula, una minuscula y un numero\nb) No debe poseer caracteres de puntuacion, solo letras y numeros\nc) De entre al menos 6 y 32 caracteres\nd) No debe tener mas de 3 numeros consecutivos\ne) No debe contener 2 caracteres que se refieran a letras alfabeticamente consecutivas (ascendentes)\nIngrese la contrase%ca: ",164,164);
 				_flushall();
-				gets(u.contrasenia);
+				gets(vet.contrasenia);
 				aceptar=false;
 				
 				while(aceptar==false){
-				if(strstr(u.contrasenia,"Q")==NULL && strstr(u.contrasenia,"W")==NULL && strstr(u.contrasenia,"E")==NULL && strstr(u.contrasenia,"R")==NULL && strstr(u.contrasenia,"T")==NULL && strstr(u.contrasenia,"Y")==NULL && strstr(u.contrasenia,"U")==NULL && strstr(u.contrasenia,"I")==NULL && strstr(u.contrasenia,"O")==NULL && strstr(u.contrasenia,"P")==NULL && strstr(u.contrasenia,"A")==NULL && strstr(u.contrasenia,"S")==NULL && strstr(u.contrasenia,"D")==NULL && strstr(u.contrasenia,"F")==NULL && strstr(u.contrasenia,"G")==NULL && strstr(u.contrasenia,"H")==NULL && strstr(u.contrasenia,"J")==NULL && strstr(u.contrasenia,"K")==NULL && strstr(u.contrasenia,"L")==NULL && strstr(u.contrasenia,"Ñ")==NULL && strstr(u.contrasenia,"Z")==NULL && strstr(u.contrasenia,"X")==NULL && strstr(u.contrasenia,"C")==NULL && strstr(u.contrasenia,"V")==NULL && strstr(u.contrasenia,"B")==NULL && strstr(u.contrasenia,"N")==NULL && strstr(u.contrasenia,"M")==NULL)
+				if(strstr(vet.contrasenia,"Q")==NULL && strstr(vet.contrasenia,"W")==NULL && strstr(vet.contrasenia,"E")==NULL && strstr(vet.contrasenia,"R")==NULL && strstr(vet.contrasenia,"T")==NULL && strstr(vet.contrasenia,"Y")==NULL && strstr(vet.contrasenia,"U")==NULL && strstr(vet.contrasenia,"I")==NULL && strstr(vet.contrasenia,"O")==NULL && strstr(vet.contrasenia,"P")==NULL && strstr(vet.contrasenia,"A")==NULL && strstr(vet.contrasenia,"S")==NULL && strstr(vet.contrasenia,"D")==NULL && strstr(vet.contrasenia,"F")==NULL && strstr(vet.contrasenia,"G")==NULL && strstr(vet.contrasenia,"H")==NULL && strstr(vet.contrasenia,"J")==NULL && strstr(vet.contrasenia,"K")==NULL && strstr(vet.contrasenia,"L")==NULL && strstr(vet.contrasenia,"Ñ")==NULL && strstr(vet.contrasenia,"Z")==NULL && strstr(vet.contrasenia,"X")==NULL && strstr(vet.contrasenia,"C")==NULL && strstr(vet.contrasenia,"V")==NULL && strstr(vet.contrasenia,"B")==NULL && strstr(vet.contrasenia,"N")==NULL && strstr(vet.contrasenia,"M")==NULL)
 				{
 					printf("La contrase%ca no posee mayuscula, ingrese de nuevo la contrase%ca",164,164);
 					_flushall();
-					gets(u.contrasenia);
+					gets(vet.contrasenia);
 				}
 				else
 				{
-					if(strstr(u.contrasenia,"q")==NULL && strstr(u.contrasenia,"w")==NULL && strstr(u.contrasenia,"e")==NULL && strstr(u.contrasenia,"r")==NULL && strstr(u.contrasenia,"t")==NULL && strstr(u.contrasenia,"y")==NULL && strstr(u.contrasenia,"u")==NULL && strstr(u.contrasenia,"i")==NULL && strstr(u.contrasenia,"o")==NULL && strstr(u.contrasenia,"p")==NULL && strstr(u.contrasenia,"a")==NULL && strstr(u.contrasenia,"s")==NULL && strstr(u.contrasenia,"d")==NULL && strstr(u.contrasenia,"f")==NULL && strstr(u.contrasenia,"g")==NULL && strstr(u.contrasenia,"h")==NULL && strstr(u.contrasenia,"j")==NULL && strstr(u.contrasenia,"k")==NULL && strstr(u.contrasenia,"l")==NULL && strstr(u.contrasenia,"ñ")==NULL && strstr(u.contrasenia,"z")==NULL && strstr(u.contrasenia,"x")==NULL && strstr(u.contrasenia,"c")==NULL && strstr(u.contrasenia,"v")==NULL && strstr(u.contrasenia,"b")==NULL && strstr(u.contrasenia,"n")==NULL && strstr(u.contrasenia,"m")==NULL)
+					if(strstr(vet.contrasenia,"q")==NULL && strstr(vet.contrasenia,"w")==NULL && strstr(vet.contrasenia,"e")==NULL && strstr(vet.contrasenia,"r")==NULL && strstr(vet.contrasenia,"t")==NULL && strstr(vet.contrasenia,"y")==NULL && strstr(vet.contrasenia,"u")==NULL && strstr(vet.contrasenia,"i")==NULL && strstr(vet.contrasenia,"o")==NULL && strstr(vet.contrasenia,"p")==NULL && strstr(vet.contrasenia,"a")==NULL && strstr(vet.contrasenia,"s")==NULL && strstr(vet.contrasenia,"d")==NULL && strstr(vet.contrasenia,"f")==NULL && strstr(vet.contrasenia,"g")==NULL && strstr(vet.contrasenia,"h")==NULL && strstr(vet.contrasenia,"j")==NULL && strstr(vet.contrasenia,"k")==NULL && strstr(vet.contrasenia,"l")==NULL && strstr(vet.contrasenia,"ñ")==NULL && strstr(vet.contrasenia,"z")==NULL && strstr(vet.contrasenia,"x")==NULL && strstr(vet.contrasenia,"c")==NULL && strstr(vet.contrasenia,"v")==NULL && strstr(vet.contrasenia,"b")==NULL && strstr(vet.contrasenia,"n")==NULL && strstr(vet.contrasenia,"m")==NULL)
 					{
 						printf("La contrase%ca no posee minuscula, ingrese de nuevo la contrase%ca",164,164);
 						_flushall();
-						gets(u.contrasenia);
+						gets(vet.contrasenia);
 					}
 					else
 					{
-						if(strstr(u.contrasenia,"0")==NULL && strstr(u.contrasenia,"1")==NULL && strstr(u.contrasenia,"2")==NULL && strstr(u.contrasenia,"3")==NULL && strstr(u.contrasenia,"4")==NULL && strstr(u.contrasenia,"5")==NULL && strstr(u.contrasenia,"6")==NULL && strstr(u.contrasenia,"7")==NULL && strstr(u.contrasenia,"8")==NULL && strstr(u.contrasenia,"9")==NULL)
+						if(strstr(vet.contrasenia,"0")==NULL && strstr(vet.contrasenia,"1")==NULL && strstr(vet.contrasenia,"2")==NULL && strstr(vet.contrasenia,"3")==NULL && strstr(vet.contrasenia,"4")==NULL && strstr(vet.contrasenia,"5")==NULL && strstr(vet.contrasenia,"6")==NULL && strstr(vet.contrasenia,"7")==NULL && strstr(vet.contrasenia,"8")==NULL && strstr(vet.contrasenia,"9")==NULL)
 						{
 							printf("La contrase%ca no posee numeros, ingrese de nuevo la contrase%ca",164,164);
 							_flushall();
-							gets(u.contrasenia);
+							gets(vet.contrasenia);
 						}
 						else
 						{
-							if(strstr(u.contrasenia,",")!=NULL && strstr(u.contrasenia,".")!=NULL && strstr(u.contrasenia,"-")!=NULL && strstr(u.contrasenia,"á")!=NULL && strstr(u.contrasenia,"é")!=NULL && strstr(u.contrasenia,"í")!=NULL && strstr(u.contrasenia,"ó")!=NULL && strstr(u.contrasenia,"ú")!=NULL && strstr(u.contrasenia,",")!=NULL && strstr(u.contrasenia,"Á")!=NULL && strstr(u.contrasenia,"É")!=NULL && strstr(u.contrasenia,"Í")!=NULL && strstr(u.contrasenia,"Ó")!=NULL && strstr(u.contrasenia,"Ú")!=NULL)
+							if(strstr(vet.contrasenia,",")!=NULL && strstr(vet.contrasenia,".")!=NULL && strstr(vet.contrasenia,"-")!=NULL && strstr(vet.contrasenia,"á")!=NULL && strstr(vet.contrasenia,"é")!=NULL && strstr(vet.contrasenia,"í")!=NULL && strstr(vet.contrasenia,"ó")!=NULL && strstr(vet.contrasenia,"ú")!=NULL && strstr(vet.contrasenia,",")!=NULL && strstr(vet.contrasenia,"Á")!=NULL && strstr(vet.contrasenia,"É")!=NULL && strstr(vet.contrasenia,"Í")!=NULL && strstr(vet.contrasenia,"Ó")!=NULL && strstr(vet.contrasenia,"Ú")!=NULL)
 							{
 								printf("La contrase%ca posee signos de puntuacion, ingrese de nuevo la contrase%ca",164,164);
 								_flushall();
-								gets(u.contrasenia);
+								gets(vet.contrasenia);
 							}
 							else
 							{
-								if(strlen(u.contrasenia)<6)
+								if(strlen(vet.contrasenia)<6)
 								{
 									printf("La contrase%ca es muy corta, ingrese de nuevo la contrase%ca",164,164);
 									_flushall();
-									gets(u.contrasenia);
+									gets(vet.contrasenia);
 								}
 								else
 								{
-									if(strlen(u.contrasenia)>32)
+									if(strlen(vet.contrasenia)>32)
 									{
 										printf("La contrase%ca es muy larga, ingrese de nuevo la contrase%ca",164,164);
 										_flushall();
-										gets(u.contrasenia);
+										gets(vet.contrasenia);
 									}
 									else
 									{
-										for(i=0;i<strlen(u.contrasenia);i++)
+										for(i=0;i<strlen(vet.contrasenia);i++)
 										{
-											if((u.contrasenia[i+2]==u.contrasenia[i+1]+1) && (u.contrasenia[i+1]==u.contrasenia[i]+1))
+											if((vet.contrasenia[i+2]==vet.contrasenia[i+1]+1) && (vet.contrasenia[i+1]==vet.contrasenia[i]+1))
 											{
 												printf("No ingrese numeros ni letras consecutivos, ingrese de nuevo la contrase%ca: ",164);
 												_flushall();
-												gets(u.contrasenia);
+												gets(vet.contrasenia);
 											}
 											else
 											{
@@ -594,7 +583,7 @@ main()
 					while(!feof){
 					fread(&vet,sizeof(veterinario),1,user);
 					if(strcmp(aux2,vet.matricula)==0){
-						printf("\nEste matricula ya existe, por favor digite otro: ");
+						printf("\nEste matricula ya existe, por favor digite otro: ");//Arreglar??
 									_flushall();
 									gets(aux2);
 					
@@ -610,14 +599,14 @@ main()
 			printf("\nIngrese nombre y apellido del veterinario: ");
 			_flushall();
 			gets(vet.apeynombre);
+			strupr(vet.apeynombre);
 			printf("\nIngrese dni: ");
 			_flushall();
 			gets(vet.dni);
 			printf("\nIngrese telefono: ");
 			_flushall();
 			gets(vet.tel);
-			strcpy(u.usuario,aux);
-			fwrite(&u,sizeof(usuario),1,user);
+			strcpy(vet.usuario,aux);
 			fwrite(&vet,sizeof(veterinario),1,user);
 			printf("\nEl veterinario fue guardado correctamente.");
 			fclose(user);
